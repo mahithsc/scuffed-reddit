@@ -15,19 +15,22 @@ const Home: NextPage = () => {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    setItems([])
-    const unsub = onSnapshot(collection(db, 'posts'), (snapshot) => {
-      snapshot.forEach((doc) => {
-        setItems(items => [...items, doc.data()])
-      })
-      console.log(items)
-    })
-
-    
-    return () => unsub()
+    getData()
   }, [])
 
 
+  const getData = async () => {
+    setItems([])
+    const c = collection(db, 'posts')
+    const snapShot = await getDocs(c)
+    snapShot.forEach((doc) => {
+      setItems(items => [...items, {
+        docId: doc.id,
+        title: doc.data().title,
+        votes: doc.data().votes
+      }])
+    })
+  }
 
   return (
     <div className="">
