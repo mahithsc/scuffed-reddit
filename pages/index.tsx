@@ -43,7 +43,7 @@ const Home: NextPage = () => {
 
       <div>
         {(items.map((item) => (
-          <Post text={item.title} votes = {item.votes} id = {item.id}/>
+          <Post text={item.title} votes = {item.votes} docId = {item.docId}/>
         )))
         }
       </div>
