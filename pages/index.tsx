@@ -41,13 +41,6 @@ const Home: NextPage = () => {
 
       <Header />
 
-      {/* <div className='flex bg-blue-500 justify-between py-10 px-10 lg:justify-around'>
-        <h1 className='text-white font-bold text-4xl'>Scuffed Reddit</h1>
-        <Link href='/modal'>
-          <button className='bg-white px-2 rounded py-2 hover:bg-slate-300'>Create Post</button>
-        </Link>
-      </div> */}
-
       <div>
         {(items.map((item) => (
           <Post text={item.title} votes = {item.votes} id = {item.id}/>
