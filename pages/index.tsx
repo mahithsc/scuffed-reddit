@@ -50,7 +50,7 @@ const Home: NextPage = () => {
 
       <div>
         {(items.map((item) => (
-          <Post text={item.title}/>
+          <Post text={item.title} votes = {item.votes} id = {item.id}/>
         )))
         }
       </div>
