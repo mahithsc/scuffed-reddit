@@ -1,5 +1,5 @@
 import { db } from './firebase'
-import { addDoc, collection, serverTimestamp, updateDoc, doc, getDoc, increment } from 'firebase/firestore'
+import { addDoc, collection, serverTimestamp, updateDoc, doc, getDoc, increment, getDocs } from 'firebase/firestore'
 import { stripVTControlCharacters } from 'util'
 
 //creates a post
@@ -25,4 +25,7 @@ const decreaseVote = async (id: string) => {
     })
 }
 
+
+
 export { createPost, addUpvote, decreaseVote }
+

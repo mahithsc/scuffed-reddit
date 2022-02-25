@@ -7,7 +7,7 @@ const Header = () => {
             <h1 className='text-white font-bold text-4xl'>Scuffed Reddit</h1>
             {/* <button type='button'  onClick={() => {console.log('hello world')}}>create post</button> */}
             <Link href='/modal'>
-                <a className='bg-white px-2 rounded py-2 hover:bg-slate-300'>Create Post</a>
+                <button className='bg-white px-2 rounded py-2 hover:bg-slate-300' >Create Post</button>
             </Link>
         </div>
     )
