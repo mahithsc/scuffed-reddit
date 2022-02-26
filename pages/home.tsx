@@ -28,7 +28,6 @@ const home = () => {
 
     useEffect(() => {
         setRender(render => render+1)
-        console.log(userInfo)
     }, [userInfo])
 
     //fetching data

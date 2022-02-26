@@ -22,7 +22,6 @@ const modal = () => {
                         <button
                             className='bg-white rounded-md px-5 mb-5 hover:bg-grey-500'
                             onClick={() => {
-                                console.log(post)
                                 createPost(post)
                             }}
                         >
