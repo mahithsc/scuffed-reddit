@@ -26,7 +26,7 @@ const authPage = () => {
   }, [userInfo])
 
   const login = async () => {
-    await signInWithPopup(auth, provider)
+    await signInWithRedirect(auth, provider)
   }
 
   return (
