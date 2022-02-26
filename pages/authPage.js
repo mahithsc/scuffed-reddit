@@ -4,34 +4,33 @@ import {GoogleAuthProvider, onAuthStateChanged, signInWithPopup} from 'firebase/
 import { useRouter } from 'next/router'
 
 const authPage = () => {
-  
-  const router = useRouter()
 
+  const router = useRouter()
   const provider = new GoogleAuthProvider();
 
-  const [user, setUser] = useState({})
+  const [userInfo, setUserInfo] = useState(null)
 
   onAuthStateChanged(auth, (user) => {
-    setUser(user)
+    if(user){
+      setUserInfo(user.uid)
+    }else{
+      setUserInfo(null)
+    }
   })
 
   useEffect(() => {
-    if(user!== null){
+    console.log(userInfo)
+    if(userInfo !== null){
       router.push('/home')
     }
-  }, [user])
+  }, [userInfo])
 
-  const signinWithGoogle = async () => {
-    try{
-      await signInWithPopup(auth, provider)
-    }catch(err){
-      console.log('err')
-    }
-
+  const login = async () => {
+    await signInWithPopup(auth, provider)
   }
 
   return (
-    <button onClick={() => signinWithGoogle()}>
+    <button onClick={() => {login()}}>
       click me
     </button>
   )
