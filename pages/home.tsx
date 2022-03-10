@@ -9,14 +9,30 @@ import { auth } from '../firebase/firebase'
 import { useRouter } from 'next/router'
 
 
-const home = () => {
-    const router = useRouter()
+//server side rendering
+export const getServerSideProps = async () => {
+    const something = []
+        const c = collection(db, 'posts')
+        const snapShot = await getDocs(c)
+        snapShot.forEach((doc) => {
+            something.push({
+                docId: doc.id,
+                title: doc.data().title,
+                votes: doc.data().votes
+            })
+        })
+    return {
+      props: {
+        todos: something
+      }
+    }
+  }
 
-    //state hook for the items in the database and the the userInformation
+const home = ({todos}) => {
+    const router = useRouter()
     const [items, setItems] = useState([])
     const [userInfo, setUserInfo] = useState(null)
     const [render, setRender] = useState(0)
-
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -27,36 +43,22 @@ const home = () => {
     })
 
     useEffect(() => {
-        setRender(render => render+1)
+        setRender(render => render + 1)
     }, [userInfo])
 
     //fetching data
     useEffect(() => {
-        getData()
-        
+        // getData()
+        console.log(todos)
     }, [])
 
     useEffect(() => {
-        if(render >= 2){
-            if(userInfo === null){
+        if (render >= 2) {
+            if (userInfo === null) {
                 router.push('/authPage')
             }
         }
     }, [render])
-
-
-    const getData = async () => {
-        setItems([])
-        const c = collection(db, 'posts')
-        const snapShot = await getDocs(c)
-        snapShot.forEach((doc) => {
-            setItems(items => [...items, {
-                docId: doc.id,
-                title: doc.data().title,
-                votes: doc.data().votes
-            }])
-        })
-    }
 
     return (
         <div className="">
@@ -68,7 +70,7 @@ const home = () => {
             <Header />
 
             <div>
-                {(items.map((item) => (
+                {(todos?.map((item) => (
                     <Post text={item.title} votes={item.votes} docId={item.docId} />
                 )))
                 }
