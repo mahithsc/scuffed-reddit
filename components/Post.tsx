@@ -5,6 +5,7 @@ import { db } from '../firebase/firebase'
 import { onSnapshot, doc } from 'firebase/firestore'
 import { stringify } from 'querystring'
 import { addUpvote, decreaseVote } from '../firebase/firebaseFunctions'
+import Link from 'next/link'
 
 const Post = ({ text, votes, docId }) => {
     const [upvotes, setUpvotes] = useState(votes)
@@ -36,7 +37,9 @@ const Post = ({ text, votes, docId }) => {
                 </button>
             </div>
 
-            <div className='ml-16'>{text}</div>
+            <Link href={`/${docId}`}>
+                <a className='ml-16 hover:underline'>{text}</a>
+            </Link>
         </div>
     )
 }

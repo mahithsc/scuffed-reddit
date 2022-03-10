@@ -7,6 +7,7 @@ import { db } from '../firebase/firebase'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 
 //server side rendering
