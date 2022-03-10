@@ -1,13 +1,32 @@
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import React from 'react'
+import {} from 'firebase/firestore'
 
-interface Props {
-    docId: string,
+const router = useRouter()
+
+export const getServerSideProps = async () => {
+
+  //gets the path of the 
+  const path:string = router.asPath
+
+  const getData = async () => {
+    
+  }
+
+  return {
+  }
 }
 
-const index: NextPage<Props> = ({docId}) => {
+const index: NextPage = () => {
+  
+  
+
   return (
-    <div>{docId}</div>
+    <div>
+      {/* <div className=''></div> */}
+      <div>{}</div>
+    </div>
   )
 }
 
