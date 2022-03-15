@@ -12,7 +12,7 @@ const Post = ({ text, votes, docId }) => {
 
     useEffect(() => {
         const unsub = onSnapshot(doc(db, "posts", docId), (doc) => {
-            setUpvotes(doc.data().votes);
+            setUpvotes(doc.data()?.votes);
         });
 
         return () => unsub()

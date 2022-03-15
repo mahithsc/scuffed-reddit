@@ -1,31 +1,39 @@
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
-import React from 'react'
-import {} from 'firebase/firestore'
+import React, { useEffect, useState } from 'react'
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { db } from '../../firebase/firebase'
+import Post from '../../components/Post'
+import Comments from '../../components/Comments'
+import CommentField from '../../components/CommentField'
 
-const router = useRouter()
+const index = () => {
+  const router = useRouter()
 
-export const getServerSideProps = async () => {
+  //useState hook
+  const [docData, setDocData]:any = useState()
+  const routerPath = router.asPath.substring(1)
+  
 
-  //gets the path of the 
-  const path:string = router.asPath
+  //useEffect hook
+  useEffect(() => {
+    getData()
+  }, [])
 
   const getData = async () => {
-    
+    // const path = router.asPath.substring(1)
+    const path = router.asPath.substring(1)
+    console.log(path)
+    const tempData = (await getDoc(doc(db, 'posts', path))).data()
+    setDocData(tempData)
   }
-
-  return {
-  }
-}
-
-const index: NextPage = () => {
-  
-  
 
   return (
     <div>
-      {/* <div className=''></div> */}
-      <div>{}</div>
+      <Post text={docData?.title} votes={docData?.votes} docId={routerPath}/>
+      <div className='ml-8 mt-11 font-bold text-2xl flex justify-center'>Comments</div>
+      <Comments/>
+      <CommentField/>
     </div>
   )
 }
