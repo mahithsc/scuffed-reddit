@@ -33,7 +33,7 @@ const index = () => {
       <Post text={docData?.title} votes={docData?.votes} docId={routerPath}/>
       <div className='ml-8 mt-11 font-bold text-2xl flex justify-center'>Comments</div>
       <Comments/>
-      <CommentField/>
+      <CommentField route={routerPath}/>
     </div>
   )
 }

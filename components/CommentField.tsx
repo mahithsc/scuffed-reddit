@@ -1,11 +1,51 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { db } from '../firebase/firebase'
+import { addDoc, collection } from 'firebase/firestore'
+import type { NextPage } from 'next'
 
-const CommentField = () => {
-  return (
-    <div className='fixed bottom-3 justify-center w-screen bg-slate-200 h-10'>
-        <div className='flex bg-black h-10 mx-10 '></div>
-    </div>
-  )
+interface Props {
+    route:string
+}
+
+const CommentField: NextPage<Props> = ({route}) => {
+
+    const [comment, setComment] = useState("")
+
+    const createComment = async () => {
+        try{
+            console.log('hello world')
+            await addDoc(collection(db, 'posts', route, 'comments'), {
+                comment: comment
+            })
+        }catch(err){
+            console.log(err.message)
+        }
+        
+    }
+
+    return (
+        <div className='fixed bottom-3 justify-center w-screen bg-slate-200 h-10 flex'>
+            <div className='h-10 mr-10 '>
+                <form className='w-full h-10'>
+                    <input type="text" className='w-full h-10 border-2 border-neutral-900'
+                    
+                    value={comment}
+                    onChange={() => {
+                        setComment('event.target.value')
+                    }}
+                    
+                    
+                    />
+                </form>
+            </div>
+            <button
+                onClick={() => createComment()}
+            >
+                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> */}
+                <div>hello world</div>
+            </button>
+        </div>
+    )
 }
 
 export default CommentField
