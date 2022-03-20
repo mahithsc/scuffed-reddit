@@ -28,9 +28,14 @@ const index = () => {
 
   return (
     <div>
+       <div className='flex bg-blue-500 justify-between py-10 px-10 lg:justify-around'>
+            <h1 className='text-white font-bold text-4xl'>Scuffed Reddit</h1>
+            {/* <button type='button'  onClick={() => {console.log('hello world')}}>create post</button> */}
+
+        </div>
       <Post text={docData?.title} votes={docData?.votes} docId={routerPath}/>
       <div className='ml-8 mt-11 font-bold text-2xl flex justify-center'>Comments</div>
-      <Comments route={routerPath}/>
+      <Comments />
       <CommentField route={routerPath}/>
     </div>
   )

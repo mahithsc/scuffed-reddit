@@ -6,8 +6,8 @@ interface Props {
 
 const CommentBlock: React.FC<Props> = ({text}) => {
     return (
-        <div className='bg-slate-200 h-28 mx-8 rounded mt-7 relative flex items-center'>
-                <a className='ml-16 hover:underline'>{text}</a>
+        <div className='bg-slate-200 h-20 mx-5 rounded mt-7 relative flex items-center'>
+                <div className='ml-16 hover:underline'>{text}</div>
         </div>
     )
 }
