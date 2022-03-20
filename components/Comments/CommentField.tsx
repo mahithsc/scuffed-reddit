@@ -1,26 +1,25 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { db } from '../../firebase/firebase'
 import { addDoc, collection } from 'firebase/firestore'
 import type { NextPage } from 'next'
 
 interface Props {
-    route:string
+    route: string
 }
 
-const CommentField: NextPage<Props> = ({route}) => {
+const CommentField: NextPage<Props> = ({ route }) => {
 
     const [comment, setComment] = useState("")
 
-    const createComment = async () => {
-        try{
-            console.log('hello world')
+    //this adds the comments 
+    const createComment = async (words: string) => {
+        try {
             await addDoc(collection(db, 'posts', route, 'comments'), {
-                comment: comment
+                comment: words
             })
-        }catch(err){
+        } catch (err) {
             console.log(err.message)
         }
-        
     }
 
     return (
@@ -28,18 +27,22 @@ const CommentField: NextPage<Props> = ({route}) => {
             <div className='h-10 mr-10 '>
                 <form className='w-full h-10'>
                     <input type="text" className='w-full h-10 border-2 border-neutral-900'
-                    
-                    value={comment}
-                    onChange={() => {
-                        setComment('event.target.value')
-                    }}
-                    
-                    
+
+                        value={comment}
+                        onChange={(event) => {
+                            setComment(event.target.value)
+                        }}
                     />
                 </form>
             </div>
             <button
-                onClick={() => createComment()}
+                onClick={() => {
+                    if (comment.length > 0) {
+                        createComment(comment)
+                        setComment("")
+                    }
+
+                }}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                 {/* <div>hello world</div> */}
