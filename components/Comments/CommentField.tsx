@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase/firebase'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, doc, onSnapshot } from 'firebase/firestore'
 import type { NextPage } from 'next'
 
 interface Props {
@@ -8,6 +8,16 @@ interface Props {
 }
 
 const CommentField: NextPage<Props> = ({ route }) => {
+
+    useEffect(() => {
+        const unsub = onSnapshot(collection(db, 'posts', route, 'comments'), (docs) => {
+            // docs.forEach((doc) => {
+            //     console.log(doc.data())
+            // })
+        })
+
+        return unsub
+    }, [])
 
     const [comment, setComment] = useState("")
 
