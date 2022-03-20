@@ -4,25 +4,23 @@ import React, { useEffect, useState } from 'react'
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase/firebase'
 import Post from '../../components/Post'
-import Comments from '../../components/Comments'
-import CommentField from '../../components/CommentField'
+import Comments from '../../components/Comments/Comments'
+import CommentField from '../../components/Comments/CommentField'
 
 const index = () => {
   const router = useRouter()
 
   //useState hook
   const [docData, setDocData]:any = useState()
-  const routerPath = router.asPath.substring(1)
+  const routerPath:string = router.asPath.substring(1)
   
 
   //useEffect hook
   useEffect(() => {
-    getData()
+    getData(routerPath)
   }, [])
 
-  const getData = async () => {
-    // const path = router.asPath.substring(1)
-    const path = router.asPath.substring(1)
+  const getData = async (path:string) => {
     console.log(path)
     const tempData = (await getDoc(doc(db, 'posts', path))).data()
     setDocData(tempData)

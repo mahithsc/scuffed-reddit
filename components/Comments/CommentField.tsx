@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { db } from '../firebase/firebase'
+import { db } from '../../firebase/firebase'
 import { addDoc, collection } from 'firebase/firestore'
 import type { NextPage } from 'next'
 
@@ -41,8 +41,8 @@ const CommentField: NextPage<Props> = ({route}) => {
             <button
                 onClick={() => createComment()}
             >
-                {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> */}
-                <div>hello world</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                {/* <div>hello world</div> */}
             </button>
         </div>
     )
