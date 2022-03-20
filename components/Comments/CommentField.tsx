@@ -9,18 +9,8 @@ interface Props {
 
 const CommentField: NextPage<Props> = ({ route }) => {
 
-    useEffect(() => {
-        const unsub = onSnapshot(collection(db, 'posts', route, 'comments'), (docs) => {
-            // docs.forEach((doc) => {
-            //     console.log(doc.data())
-            // })
-        })
-
-        return unsub
-    }, [])
-
     const [comment, setComment] = useState("")
-
+    
     //this adds the comments 
     const createComment = async (words: string) => {
         try {
